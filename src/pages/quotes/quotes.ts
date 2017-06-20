@@ -26,29 +26,37 @@ export class QuotesPage implements OnInit {
     this.quoteGroup = this.navParams.data;
   }
 
-  onAddToFavorite(selectedQuote: Quote) {
+  onAddToFavorites(selectedQuote: Quote) {
     const alert = this.alertCtrl.create({
       title: 'Add Quote',
       subTitle: 'Are you sure?',
       message: 'Are you sure you want to add quote?',
       buttons: [
         {
-          text: 'Yes, go ahead',
-          handler: () => {
-            console.log('Ok');
-            this.quoteService.addQuoteToFavorite(selectedQuote);
-          }
-        },
-        {
           text: 'No, I changed my mind!',
           role: 'cancel',
           handler: () => {
             console.log('Cancelled');
           }
+        },
+        {
+          text: 'Yes, go ahead',
+          handler: () => {
+            console.log('Ok');
+            this.quoteService.addQuoteToFavorite(selectedQuote);
+          }
         }
       ]
     });
     alert.present();
+  }
+
+  onRemoveFromFavorites(quote: Quote) {
+    return this.quoteService.removeQuoteFromFavorite(quote);
+  }
+
+  isFavorite(quote: Quote){
+    return this.quoteService.isQuoteFavorite(quote);
   }
 
 }

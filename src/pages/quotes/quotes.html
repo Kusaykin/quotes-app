@@ -9,13 +9,13 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor="let qoute of quoteGroup.quotes; let i = index">
+  <ion-card *ngFor="let quote of quoteGroup.quotes; let i = index">
     <ion-card-header>
       #{{ i + 1 }}
     </ion-card-header>
     <ion-card-content>
-      <p>{{ qoute.text }}</p>
-      <p class="author">{{ qoute.person }}</p>
+      <p>{{ quote.text }}</p>
+      <p class="author">{{ quote.person }}</p>
     </ion-card-content>
     <ion-row>
       <ion-col text-right>
@@ -23,7 +23,15 @@
           ion-button
           clear
           small
-          (click)="onAddToFavorite(qoute)">Favorite</button>
+          (click)="onAddToFavorites(quote)"
+          *ngIf="!isFavorite(quote)">Favorite</button>
+          <button
+          ion-button
+          clear
+          small
+          color="danger"
+          (click)="onRemoveFromFavorites(quote)"
+          *ngIf="isFavorite(quote)">Unfavorite</button>
       </ion-col>
     </ion-row>
   </ion-card>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController, NavParams } from 'ionic-angular';
+import {QuotesService} from "../../services/quotes";
 
 @Component({
   selector: 'page-quote',
@@ -10,14 +11,15 @@ export class QuotePage {
   text: string;
 
   constructor (private viewCtrl: ViewController,
-              private navParams: NavParams){}
+               private navParams: NavParams,
+               private quoteService: QuotesService,){}
 
   ionViewDidLoad(){
     this.person = this.navParams.get('person');
     this.text = this.navParams.get('text');
-  }              
+  }
 
-  onClose(remove = false) {    
+  onClose(remove = false) {
     this.viewCtrl.dismiss(remove);
   }
 }
